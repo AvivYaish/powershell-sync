@@ -16,11 +16,13 @@ foreach ($folder_pair in $folder_pairs) {
         }
     }
     if ($exists) {
-        robocopy $source $target /mir /zb /mt
+        robocopy $source $target /mir /zb /mt /copy:DT /nodcopy /r:2 /w:3
         # robocopy is Windows' built-in file copy tool
         # /mir - mirrors source to target
         # /mt - multithreading
         # /zb - 'z' allows restarting, 'b' is backup mode (allows copying files that you might not have access to)
+        # /r:n - retry n times in case of an error
+        # /w:n - wait n seconds in case of an error
         # For more details, see:
         # https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy 
     }
